@@ -75,8 +75,8 @@ export function Footer({ showGuides = false }: { showGuides?: boolean }) {
           <ul className="hk-footer__links">
             <li><a href={company.tel}>{company.phone}</a></li>
             <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+            {on('emergency') && <li className="hk-footer__urgent"><a href={sections.emergency.tel}>{sections.emergency.phone}</a><span>{sections.emergency.label}</span></li>}
           </ul>
-          {on('emergency') && <p className="hk-footer__urgent"><span>{sections.emergency.label}</span><a href={sections.emergency.tel}>{sections.emergency.phone}</a></p>}
         </div>
         {company.offices.length > 0 && (
           <div>

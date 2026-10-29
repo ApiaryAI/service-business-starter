@@ -604,8 +604,7 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
 @media (max-width: 640px) { .sx-emergency span { display: none; } }
 .sx-urgent { max-width: 60ch; margin-top: 22px; padding: 14px 16px; border-left: 3px solid var(--c-red); background: #fff; }
 .sx-urgent a { font-weight: 700; white-space: nowrap; }
-.hk-footer__urgent { display: grid; margin: 16px 0 0; font-size: 0.9rem; color: var(--c-muted); }
-.hk-footer__urgent a { font-weight: 700; color: var(--c-red); }
+.hk-footer__urgent span { display: block; margin-top: -4px; font-size: 0.9rem; color: var(--c-muted); }
 .sx-quotes, .sx-team, .sx-docs, .sx-chips, .sx-accred, .sx-gallery { margin: 30px 0 0; padding: 0; list-style: none; }
 .sx-quotes { display: grid; gap: 20px; }
 @media (min-width: 900px) { .sx-quotes { grid-template-columns: repeat(3, 1fr); } }
