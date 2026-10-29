@@ -4,6 +4,7 @@ import { Footer } from '../components/blocks';
 import { Header } from '../components/Header';
 import { Tracking } from '../components/Tracking';
 import { EmergencyBar } from '../components/Sections';
+import { socialProfiles } from '../lib/sections';
 import { getMenus } from '../lib/menus';
 import { company } from '../lib/content';
 import { motionBootScript } from '../lib/motion-boot';
@@ -17,9 +18,11 @@ export const metadata: Metadata = {
  formatDetection: { telephone: true, email: true },
 };
 export const viewport: Viewport = { themeColor: '#ffffff', colorScheme: 'light' };
+const sameAs = socialProfiles(company.readyForLaunch);
+const withProfiles = sameAs.length ? { ...businessStructuredData, '@graph': businessStructuredData['@graph'].map(n => n['@type'] === 'Organization' ? { ...n, sameAs } : n) } : businessStructuredData;
 export default function RootLayout({ children }: { children: ReactNode }) {
  return <html lang={company.language} suppressHydrationWarning><head>
-  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessStructuredData).replace(/</g, '\\u003c') }} />
+  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(withProfiles).replace(/</g, '\\u003c') }} />
   <script dangerouslySetInnerHTML={{ __html: motionBootScript }} />
   <link rel="preload" href="/libre-franklin.woff2" as="font" type="font/woff2" crossOrigin="" />
  </head><body>

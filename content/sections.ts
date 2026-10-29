@@ -319,6 +319,20 @@ const sections: Sections = {
     intro: "Example news articles from content/news/.",
     homeCount: 3,
   },
+
+  // Demo links go to each platform's home page. Use the business's own profile URLs.
+  socials: {
+    enabled: true,
+    label: 'Find us elsewhere',
+    items: [
+      { name: 'Facebook', href: 'https://www.facebook.com/' },
+      { name: 'Instagram', href: 'https://www.instagram.com/' },
+      { name: 'X', href: 'https://x.com/' },
+      { name: 'Threads', href: 'https://www.threads.com/' },
+      { name: 'YouTube', href: 'https://www.youtube.com/' },
+      { name: 'LinkedIn', href: 'https://www.linkedin.com/' },
+    ],
+  },
 };
 
 export default sections;

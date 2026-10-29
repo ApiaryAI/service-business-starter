@@ -1,9 +1,11 @@
 import data from "../content/sections";
+import { site } from "./site";
 
 /* Optional website sections. Every section has `enabled`; set it to false to remove the section
    from pages, menus, the footer and the sitemap. Content for each section lives in content/sections.ts.
    Images and files are paths under public/, e.g. "/demo/project-1.jpg". */
 
+export type SocialName = 'Facebook' | 'Instagram' | 'X' | 'Threads' | 'YouTube' | 'LinkedIn';
 export interface Img {
   src: string;
   alt: string;
@@ -112,6 +114,8 @@ export interface Sections {
   };
   /** Company news from content/news/*.md: /news/ and /news/<slug>/. */
   news: Copy & { homeCount: number };
+  /** Footer row of profile links, also listed as sameAs in the structured data. Icons in public/socials/. */
+  socials: Toggle & { label: string; items: { name: SocialName; href: string }[] };
 }
 
 export const sections: Sections = data;
@@ -142,4 +146,11 @@ export function licenceLine() {
   ]
     .filter(Boolean)
     .join(" · ");
+}
+
+/** Profile URLs for structured data; demo links to platform home pages are left out. */
+export const socialProfiles = (live: boolean) => (live && on('socials') ? sections.socials.items.map(s => s.href) : []);
+
+if (site.readyForLaunch && on('socials') && sections.socials.items.some(s => new URL(s.href).pathname.replace(/\/$/, '') === '')) {
+  throw new Error('Replace the demo social links (platform home pages) with the business profile URLs, or set socials.enabled to false.');
 }

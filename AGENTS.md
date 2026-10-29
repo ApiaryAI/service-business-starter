@@ -39,6 +39,7 @@ from pages, menus, the footer and the sitemap, and its page returns 404.
 | `gallery` | /gallery/ photo grid with a lightbox. The business's own photos only |
 | `responsibility` | /responsibility/ sustainability, community, reconciliation blocks |
 | `fleet` | /fleet/ equipment catalogue and /fleet/<slug>/ pages (plant hire, equipment) |
+| `socials` | "Find us elsewhere" footer row with logos (public/socials/) and `sameAs` structured data. The business's own profile URLs only |
 | `news` | /news/ from content/news/*.md (title, date, summary, image, image_alt) |
 
 ## Rules

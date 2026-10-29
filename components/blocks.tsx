@@ -92,6 +92,22 @@ export function Footer({ showGuides = false }: { showGuides?: boolean }) {
           </div>
         )}
       </div>
+      {on('socials') && (
+        <div className="container hk-footer__socials">
+          <h2 className="hk-footer__head" id="footer-socials">{sections.socials.label}</h2>
+          <ul aria-labelledby="footer-socials">
+            {sections.socials.items.map(({ name, href }) => (
+              <li key={name}>
+                <a href={href} target="_blank" rel="noopener noreferrer">
+                  <img src={`/socials/${name.toLowerCase()}.svg`} alt="" width={22} height={22} />
+                  {name} <span aria-hidden="true">↗</span>
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="container hk-footer__base">
         <span>© {company.name}{licenceLine() && <> · {licenceLine()}</>}</span>
         <nav aria-label="Legal">
