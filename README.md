@@ -31,9 +31,26 @@ Run `npm run check` before every release: typecheck, enquiry and tracking tests,
 
 The template is built to be filled in by an AI coding agent. [AGENTS.md](AGENTS.md) tells the agent how to switch sections off, where every piece of content lives, and the rules: verified facts only, no invented staff, reviews, licences or projects.
 
-## Going live
+## Going live: do it in this order
 
-`readyForLaunch: false` in `lib/site.ts` keeps the site out of search engines and turns off server email. Setting it to `true` refuses to build while example phone numbers, emails, domains, addresses or social links remain. See [Docs/LAUNCH.md](Docs/LAUNCH.md) for the full order: preview, domain, Resend, launch, test enquiry, then Google.
+Build and get approval on a free preview first, connect the domain and email second, launch third, and tell Google last.
+
+| Step | What to do | Why now |
+|---|---|---|
+| 1. Repository | **Use this template** on GitHub, one private repo per business | Each site has its own code and settings |
+| 2. Vercel | Import the repo into a new Vercel project | Every push gets a free preview link |
+| 3. Content | Fill in `lib/site.ts` and `content/sections.ts`, replace the examples | Real facts only; switch off what you don't have |
+| 4. Approval | The business reviews the preview link | Nothing public yet; the preview is `noindex` |
+| 5. Domain | Add it in Vercel and set the DNS records | If they already have email on the domain, leave the MX records alone |
+| 6. Resend | Add the domain, add the SPF/DKIM records, wait for **Verified**, create an API key | Needs the domain's DNS from step 5 |
+| 7. Keys | Set `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL` in Vercel | Turns on direct enquiry email |
+| 8. Launch | Set the real `url` and `readyForLaunch: true`, push to `main` | The build refuses while any example details remain |
+| 9. Test | Send a real enquiry with a photo from the live site | Proves email actually arrives |
+| 10. Search Console | Verify the domain, submit `/sitemap.xml` | Google only sees the finished site |
+| 11. Business Profile | Point the Google Business Profile at the new site | Sends local searchers to it |
+| 12. Old site | Redirect every old page to its new page | Keeps existing Google rankings |
+
+Resend is optional: without it, the form prepares the enquiry in the visitor's own email app. Full details for each step are in [Docs/LAUNCH.md](Docs/LAUNCH.md).
 
 ## Commands
 
