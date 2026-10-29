@@ -1,31 +1,51 @@
-# Launch a client site
+# Launch a site
 
-## Content and branding
+Work in this order: build and approve on a free preview first, connect the domain and email
+second, launch third, and tell Google only once the site is live.
 
-- Replace every example business field in `lib/site.ts`; use one HTTPS origin with no path, query or fragment.
-- Supply verified service scope, service area, contact hours, staff facts, qualifications and images. Do not transfer another business's clients, testimonials or experience claims.
-- Rewrite all example service pages and guides for the actual business. Keep URLs stable once published.
-- Add logo, favicon and a raster social-sharing image; update `lib/seo.ts`.
-- Review policies and any provider disclosures against actual processing and business practices.
+## 1. Build (no domain needed)
 
-## Receiving enquiries
+1. **Repository:** on GitHub choose **Use this template**, one private repository per business.
+2. **Vercel:** create a new project and import that repository. Every push gives a preview link
+   such as `business-name.vercel.app`. Vercel's free Hobby plan is for non-commercial use;
+   business sites need a Pro team.
+3. **Content:** fill in `lib/site.ts`, switch sections in `content/sections.ts`, and replace the
+   example services, guides, projects, clients, logo, colours and hero art. Verified facts only.
+4. **Approval:** the business reviews the preview link. It stays `noindex` until launch.
 
-- Without server credentials the form prepares an email for the visitor's own email app; it never claims server delivery.
-- For direct delivery use a new Resend account/project, verify the sender domain and configure `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL` as server secrets. The recipient is owned by `lib/site.ts`, never the browser.
-- Direct sending uses Vercel BotID. Keep the verification and body/attachment checks. Other hosting platforms need a separately reviewed bot-verification integration before enabling direct delivery.
-- The server accepts the configured website origin and a Vercel preview origin. A local dev form uses port 3000; change the origin allowlist explicitly if you choose another dev port.
-- Confirm mail delivery once on the actual production domain using an authorised test recipient. Unit tests mock delivery; they do not prove email reaches an inbox.
+## 2. Domain and email
 
-## Analytics
+5. **Domain:** add it in Vercel (Project → Settings → Domains) and add the DNS records Vercel shows
+   at the registrar. If the business already receives email on that domain, change only the
+   website records (A / CNAME) and leave the MX records alone, or their email stops.
+6. **Resend:** create an account, add the domain, add Resend's SPF and DKIM records in the same
+   DNS settings, and wait for **Verified**. Then create an API key.
+7. **Vercel environment variables** (Production): `RESEND_API_KEY` and `ENQUIRY_FROM_EMAIL`
+   (for example `website@business.com.au`, on the verified domain). Enquiries go to the `email`
+   in `lib/site.ts`, never an address from the browser. Use a new Resend project and fresh
+   analytics IDs for every business; never copy keys or `.vercel` links between sites.
 
-- Enable Web Analytics in the new Vercel project only when wanted. Optional PostHog/Google/Meta IDs remain blank until configured for that client.
-- Ensure policies describe actual enabled providers. Cookie-based tools require the banner and appropriate visitor choices.
-- Verify events once in the deployed dashboard. Mark/avoid internal test traffic when interpreting results.
+Without Resend the site still works: the form prepares the enquiry in the visitor's own email app.
 
-## Indexing
+## 3. Launch
 
-- Keep `readyForLaunch: false` during setup. This excludes the demo from indexing and disables direct server mail even if credentials exist.
-- Once verified, set `readyForLaunch: true`, confirm real contacts and content, and deploy in Vercel's production environment. A launch validation guard refuses placeholder contact/domain/area fields.
-- Add the real domain in the new Vercel project. Configure its canonical host redirect there; the template includes no old-domain redirects.
-- Run `npm run check`. Inspect the live canonical tags, noindex/index metadata, robots file and sitemap.
-- Verify the new Search Console property, submit its sitemap and request indexing for key pages. Inclusion and ranking remain Google's decisions.
+8. **Switch on:** set the real `url` and `readyForLaunch: true` in `lib/site.ts` and push to
+   `main`. The build refuses to go live while example contacts, domains, addresses or social
+   links remain. Remove `public/demo/` once nothing uses it.
+9. **Test enquiry:** send one real enquiry with a photo from the live domain and confirm it reaches
+   the inbox. Unit tests mock delivery; they don't prove an email arrives.
+
+## 4. Tell Google (only once live)
+
+10. **Search Console:** verify the domain, submit `/sitemap.xml` and request indexing for the
+    homepage and service pages.
+11. **Google Business Profile:** point its website link at the new site.
+12. **Old website:** if the business had one on another domain, redirect every old page to the
+    matching new page so existing rankings carry over.
+
+## Analytics (optional)
+
+Vercel Web Analytics is cookieless and switched on in the Vercel dashboard. PostHog, Google
+Analytics, Google Ads and Meta IDs in `.env.example` stay blank until wanted; setting any of them
+turns on the cookie banner, so update the privacy and cookies pages first. See
+[TRACKING.md](TRACKING.md) for event meanings.

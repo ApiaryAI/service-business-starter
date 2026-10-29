@@ -1,68 +1,55 @@
 # Service Business Starter
 
-A private reusable Next.js starter for service businesses: focused service pages, practical guides, clear contact routes and measurable enquiries.
+A free Next.js website template for trades, construction and service businesses: service pages that rank, practical guides, projects, and an enquiry form on every page that emails the business directly.
 
-## Start a new site
+**Live demo:** https://service-business-starter.vercel.app (every optional section switched on)
 
-1. On GitHub choose **Use this template → Create a new repository**. Give each client a separate private repository.
-2. Run `npm ci`, then `npm run dev`. The default site is a demonstration with example contacts, no outgoing server email and `noindex` metadata.
-3. Edit **`lib/site.ts`**: business name, tagline, description, phone, email, service region, project categories and about text.
-4. Edit **`lib/content.ts`** for service categories and enquiry options; **`lib/service-pages.ts`** for unique service pages. These are examples, not claims about a real business.
-5. Replace the three example guides in **`content/guides/`**. Add verified firsthand information and service-specific images. Change publication/update dates only when appropriate.
-6. Customise the colour variables in **`app/globals.css`**, `components/Brand.tsx`, `public/icon.svg`, `app/icon.svg` and `public/social.svg`. Supply a final PNG/JPEG social image and update `lib/seo.ts` for broad social platform compatibility. The `hk-` CSS prefix is inherited styling, not customer branding.
-7. Review the website policy examples for the business's actual operations, enabled providers and jurisdiction. They are starting copy, not a complete business contract.
-8. Follow [LAUNCH.md](Docs/LAUNCH.md). Run `npm run check` before release.
+## What's included
 
-## Client cards
+- **Pages that bring in work:** homepage, a page per service with its own enquiry form, about, contact.
+- **Guides:** Markdown articles linked to the services they support. Drafts stay out of the live site.
+- **Projects:** completed jobs and sites the business looks after, each linked to a service.
+- **Enquiries:** a form with up to four photos, sent straight to the business inbox through Resend, with bot protection from Vercel BotID. Without email set up, the form prepares the message in the visitor's own email app instead.
+- **18 optional sections**, all switched on in the demo: 24/7 emergency bar, licences, sectors, service areas, testimonials, team, awards, history, documents, safety and accreditations, careers and apprenticeships, photo gallery, responsibility, equipment catalogue, news, client logos and social media links. Each one is a single `enabled` switch in `content/sections.ts`.
+- **SEO basics done:** canonical URLs, sitemap, robots, structured data (Organization, Service, Article), and `noindex` until you launch.
+- **Accessible and fast:** keyboard menus, skip link, reduced-motion support, static pages.
 
-The homepage includes the original rotating client-card design with editable names and optional logos. Configure `content/clients.json` and place approved logo files under `public/clients/`. Example cards are labelled demonstrations and disappear when `readyForLaunch` is enabled. Add real relationships with `example: false`; do not reuse another business's customer list. The carousel has a visible pause/resume button, keyboard controls and a static reduced-motion layout.
+## Start a site
 
-## Projects
+1. On GitHub choose **Use this template → Create a new repository**. Use one repository per business.
+2. Run `npm ci`, then `npm run dev` and open http://localhost:3000.
+3. Edit the business details in **`lib/site.ts`**.
+4. Switch sections on or off in **`content/sections.ts`** and fill in the ones you keep with real details.
+5. Replace the example services (`lib/content.ts`, `lib/service-pages.ts`), guides (`content/guides/`), projects (`content/projects.json`) and clients (`content/clients.json`).
+6. Set your colours in `app/globals.css` and your logo in `components/Brand.tsx` and `public/`.
+7. Replace the homepage hero art placeholder (`components/HeroArt.tsx`) with an animation of your trade, or a photo.
+8. Follow **[Docs/LAUNCH.md](Docs/LAUNCH.md)** to connect Vercel, your domain and Resend, then go live.
 
-The Projects tab showcases completed jobs and sites the business currently services. Add entries in `content/projects.json` and photographs under `public/projects/`. Each project links to a service and includes an enquiry form for similar work. See [PROJECTS.md](Docs/PROJECTS.md) for the fields and publication rules.
+Run `npm run check` before every release: typecheck, enquiry and tracking tests, production build and template checks.
 
-## Included
+## Using it with an AI agent
 
-- A responsive homepage, service directory, about page and contact page.
-- Three sample service detail pages with an enquiry form on each page.
-- Three linked Markdown guides, article metadata and service links.
-- Canonical URLs, Organization/WebSite/Service/Article data and sitemap/robots routes.
-- Draft exclusion in production builds; publication blocked by unresolved `OWNER:` or `VERIFY:` notes.
-- Accessible labels, keyboard menus, skip link and reduced-motion support.
-- Direct enquiries via Resend and Vercel BotID, or an email-app preparation/review/copy flow without credentials.
-- Up to four browser-resized JPEG photo attachments, with server-side type and size checks.
-- Enquiry analytics with page and placement; consent controls for optional providers.
-- 25 inherited behavioural checks covering form validation, fixed recipients, request verification, idempotency, attachments, privacy and tracking failures.
+The template is built to be filled in by an AI coding agent. [AGENTS.md](AGENTS.md) tells the agent how to switch sections off, where every piece of content lives, and the rules: verified facts only, no invented staff, reviews, licences or projects.
+
+## Going live
+
+`readyForLaunch: false` in `lib/site.ts` keeps the site out of search engines and turns off server email. Setting it to `true` refuses to build while example phone numbers, emails, domains, addresses or social links remain. See [Docs/LAUNCH.md](Docs/LAUNCH.md) for the full order: preview, domain, Resend, launch, test enquiry, then Google.
 
 ## Commands
 
 ```sh
-npm ci
-npm run dev
-npm run typecheck
-npm test
-npm run build
-npm run check
+npm ci            # install
+npm run dev       # local site
+npm run check     # everything before release
 ```
 
-Node 22 is used in CI. Dependencies are locked in `package-lock.json`. Content is maintained in Git; Markdown is trusted author input and must not come directly from untrusted visitors.
+Node 22 is used in CI.
 
-## Content pattern
+## Licence and credits
 
-A service page answers a buying need. A guide answers a specific question. Link each guide to the relevant service and each service to genuinely useful guides. Avoid duplicate suburb pages, unsupported claims and articles written only to fill a keyword list.
+Released under the [MIT licence](LICENSE). Made by [Daniel Najda](https://danielnajda.com).
 
-The guide front matter accepts `title`, `description`, `status`, `published`, `updated`, comma-separated `services` (category IDs), comma-separated `related` guide slugs, and optional `image`, `image_alt`, `image_caption`. Diagram assets live at `/guides/<slug>.svg`. Guides marked `draft` appear in development only. Published guides require valid dates and resolved editorial notes. Preview deployments remain excluded from indexing.
-
-## Integration setup
-
-Copy `.env.example` to `.env.local` only for your own new project. Never copy credentials, `.vercel` project links or analytics identifiers from another client. All optional provider IDs default blank. `lib/site.ts` holds public business data only. See [TRACKING.md](Docs/TRACKING.md) for event meanings.
-
-## Provenance
-
-Derived from the site architecture in `ApiaryAI/hiteck-lifts`, source commit `157cecc2e4ac5357eb68cac9b13b14874a8ceffc` (29 October 2026). This is a separate repository with a fresh history. The source site's customer logos, portraits, lift illustrations, lift articles, business contracts, Search Console token and deployment configuration are not included.
-
-This private starter has no open-source licence grant. Confirm reuse rights before distributing it outside your organisation. Font files carry their included upstream SIL Open Font License notices in `public/fonts/`.
-
-## What this does not prove
-
-The source site's recorded enquiries demonstrate contact activity, not a controlled SEO experiment or a guarantee of future leads. Performance, rankings, traffic quality and commercial outcomes must be measured on each deployment. The original Hiteck site is not changed by this template.
+- Fonts (Libre Franklin, Sora) are under the SIL Open Font License; notices are in `public/fonts/`.
+- Social media logos are from [SVGL](https://svgl.app) (sources in `public/socials/SOURCES.md`); the trademarks belong to their owners.
+- Demo images in `public/demo/` are plain placeholders. Replace them with the business's own photos.
+- The privacy, terms, cookies and accessibility pages are starting copy, not legal advice. Check them against how the business actually operates.

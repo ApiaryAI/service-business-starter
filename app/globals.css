@@ -1,7 +1,5 @@
-/* Your Service Business.
-   Colours follow Your Service Business's existing identity: white surfaces, black type, neutral greys
-   (#303030, #151515, #f3f3f3 from example.com) and the logo red #17665e.
-   The logo is public/service-starter-logo.svg, a sharp redraw of the official PNG.
+/* Service Business Starter styles.
+   Brand colours are the variables in :root below: change --c-red (the accent) and the neutrals.
    Decorative animation only runs under html.motion-on (see lib/motion.ts). */
 
 @font-face {
@@ -151,9 +149,6 @@ html.motion-on .hk-header__rail span { opacity: 1; animation: hk-rail 6s linear 
 .hk-hero__copy > .eyebrow { margin-bottom: 10px; }
 .hk-hero__copy h1 { margin-bottom: 0.4em; font-size: clamp(2.3rem, 3.8vw, 3.55rem); }
 .hk-hero__copy .lede { max-width: 52ch; }
-/* Anova's perimeter draw and circulating light, in Your Service Business red on a clear background.
-   The actual transparent PNG stays visible throughout. Motion off shows the complete frame. */
-.hk-hero-logo { display: block; width: min(100%, 480px); margin: 8px 0 18px; }
 .hk-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 .hk-readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 26px 0 0; }
 .hk-readouts div { position: relative; padding: 14px 16px; border: 1px solid var(--c-line); border-radius: var(--radius); background: var(--c-pale); }
@@ -162,8 +157,6 @@ html.motion-on .hk-header__rail span { opacity: 1; animation: hk-rail 6s linear 
 .hk-readouts dd { margin: 4px 0 0; font-family: var(--mono); font-weight: 600; color: var(--c-text); font-variant-numeric: tabular-nums; }
 .hk-readouts--hero { margin-top: 20px; }
 
-/* ---------- Homepage lift illustration beside the hero logo ---------- */
-.hk-lift { width: 100%; max-width: 440px; margin-inline: auto; overflow: hidden; border: 1px solid var(--c-line); border-radius: var(--radius-lg); background: #fff; box-shadow: var(--shadow); }
 .hk-art { padding: 14px 14px 12px; background: var(--c-ink); color: var(--c-on-ink); }
 .hk-art__stage { position: relative; aspect-ratio: 520 / 610; }
 .hk-diagram { width: 100%; height: 100%; overflow: visible; }
@@ -246,7 +239,7 @@ html.motion-on .hk-ticker:hover .hk-ticker__viewport, html.motion-on .hk-ticker:
 .hk-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
 .hk-photo figcaption { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--c-pale); border-top: 1px solid var(--c-line); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); }
 
-/* ---------- Client carousel (after the Anova Electrical orbit; static grid without motion) ---------- */
+/* ---------- Client carousel (static grid without motion) ---------- */
 .hk-clients-sec .hk-muted { max-width: 60ch; }
 /* Side cards on the orbit may reach past the screen edge on phones; never let them cause sideways scrolling. */
 .hk-clients-sec { overflow-x: clip; }
@@ -278,18 +271,6 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
   .hk-clients__logo { max-height: 40px; }
   html.motion-on .hk-clients__card { opacity: calc(max(0, var(--c)) * max(0, var(--c)) * max(0, var(--c)) * max(0, var(--c))); }
 }
-
-/* ---------- Lift-type directory board ---------- */
-.hk-directory-sec { background: var(--c-pale); border-block: 1px solid var(--c-line); }
-.hk-directory__grid { display: grid; gap: 36px; align-items: start; }
-@media (min-width: 940px) { .hk-directory__grid { grid-template-columns: 0.8fr 1.2fr; } }
-.hk-directory { list-style: none; margin: 0; padding: 10px; border-radius: var(--radius-lg); background: var(--c-ink); color: var(--c-on-ink); box-shadow: var(--shadow); }
-.hk-directory li { display: grid; grid-template-columns: 64px 1fr; gap: 2px 18px; padding: 16px 14px; border-bottom: 1px dashed var(--c-ink-2); transition: background-color 0.25s; }
-.hk-directory li:last-child { border-bottom: 0; }
-.hk-directory li:hover { background: rgb(255 255 255 / 0.04); }
-.hk-directory__lvl { grid-row: span 2; align-self: center; padding: 6px 0; border-radius: 4px; background: #0f0f0f; border: 1px solid var(--c-ink-2); font-family: var(--mono); font-size: 1.25rem; font-weight: 700; text-align: center; color: var(--c-red); }
-.hk-directory__name { font-weight: 750; font-size: 1.15rem; }
-.hk-directory__text { color: #bdbdbd; font-size: 0.95rem; }
 
 /* ---------- CTA ---------- */
 .hk-cta { padding: clamp(52px, 7vw, 92px) 0; border-top: 4px solid var(--c-red); background: var(--c-ink); color: var(--c-on-ink); }
@@ -543,7 +524,6 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
   .hk-art__scope { margin-inline: 2%; }
   .hk-cop { padding: 12px; }
   .hk-key-btn { width: 44px; height: 44px; }
-  .hk-directory li { grid-template-columns: 52px 1fr; gap: 2px 12px; padding: 14px 8px; }
 }
 
 /* Belt and braces: never animate for reduced-motion users who have not opted back in. */
