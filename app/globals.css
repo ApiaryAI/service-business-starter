@@ -673,3 +673,20 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
 .cx-general a { font-weight: 700; }
 .cx-apply { margin-top: 28px; }
 .cx-photo { aspect-ratio: 3 / 2; object-fit: cover; }
+
+/* ---------- Hero art slot (components/HeroArt.tsx) ---------- */
+.starter-hero .hk-hero__grid { align-items: center; }
+.sx-heroart { position: relative; width: 100%; max-width: 460px; margin-inline: auto; overflow: hidden; border-radius: var(--radius-lg); background: var(--c-ink); box-shadow: var(--shadow); }
+.sx-heroart svg { display: block; width: 100%; height: auto; }
+.sx-heroart pattern path { fill: none; stroke: rgb(255 255 255 / 0.06); stroke-width: 1; }
+.sx-heroart__draw { fill: none; stroke: #fff; stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 0; }
+.sx-heroart__ground { stroke: rgb(255 255 255 / 0.4); stroke-width: 2; }
+.sx-heroart__floor rect { fill: rgb(255 255 255 / 0.06); stroke: rgb(255 255 255 / 0.25); }
+.sx-heroart__floor text { fill: var(--c-on-ink-dim); font: 600 13px var(--mono); }
+.sx-heroart p { position: absolute; left: 16px; bottom: 12px; margin: 0; font: 600 0.7rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-on-ink-dim); }
+html.motion-on .sx-heroart__draw { animation: sx-draw 2.4s var(--ease-out) both; }
+html.motion-on .sx-heroart__floor rect { animation: sx-floor 3s ease-in-out infinite; }
+@keyframes sx-draw { from { stroke-dashoffset: 1200; } }
+@keyframes sx-floor { 0%, 100% { fill: rgb(255 255 255 / 0.06); } 20%, 40% { fill: var(--c-red); stroke: var(--c-red); } }
+@media (max-width: 999px) { .sx-heroart { max-width: 380px; } }
+@media (max-width: 520px) { .hk-readouts--hero { grid-template-columns: repeat(3, 1fr); gap: 8px; } .hk-readouts--hero div { padding: 12px 10px 12px 14px; } .hk-readouts--hero dd { font-size: 0.9rem; } }

@@ -13,6 +13,12 @@ export const site = {
   language: 'en-AU',
   phoneHours: 'Contact hours to be confirmed',
   projectTypes: ['Commercial property', 'Residential property', 'Shared property', 'Other equipment', 'Other project', 'Not sure'],
+  /** Up to three short facts under the hero buttons, e.g. response time or years of experience. Verified only. */
+  heroFacts: [
+    { label: 'Call outs', value: '24/7' },
+    { label: 'Experience', value: '20+ years' },
+    { label: 'Licensed', value: 'Builder · Plumber' },
+  ],
   /** Public offices shown in the footer. Use an empty list for a business without a public address. */
   offices: [
     { tag: 'NSW', name: 'Head office', lines: ['1 Example Street', 'Example NSW 2000'] },

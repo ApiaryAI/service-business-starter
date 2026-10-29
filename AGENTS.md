@@ -50,3 +50,11 @@ from pages, menus, the footer and the sitemap, and its page returns 404.
 - Before `readyForLaunch: true`, every enabled section must contain real content: no "Example"
   text and no files from public/demo/. Delete public/demo/ once nothing references it.
 - After changing sections run `npm run check`, then look at the home, about and contact pages.
+
+## Homepage hero art
+
+The right side of the homepage hero is an art slot (`components/HeroArt.tsx`), shown as a dark
+placeholder panel in the demo. Replace it with an animated scene of the client's trade (e.g. a
+lift diagram for a lift company): keep the `.sx-heroart` frame, keep the art `aria-hidden`,
+animate only under `html.motion-on`, and remove the "Hero animation slot" label. The three
+`heroFacts` under the hero buttons live in `lib/site.ts`; verified facts only.
