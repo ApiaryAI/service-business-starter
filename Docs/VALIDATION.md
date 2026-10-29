@@ -12,3 +12,7 @@ Checks are recorded after running typecheck, the inherited enquiry/tracking suit
 - Template check passed for 16 rendered pages: internal links, demo noindex metadata, sitemap routes and customer-identity scan.
 - Browser checked at desktop width and 390×844 mobile: homepage, service detail, selected service in enquiry preview, menu opening and Escape dismissal. No email-app link or real send was activated.
 - Optional provider delivery, real email delivery, production BotID and ranking results remain unverified until a new client configures and launches their own project.
+
+## Projects and client cards
+
+Added a Projects directory and detail pages for completed work and ongoing service locations, with local photo support, relevant-service links and service-selected enquiry forms. The homepage client-card carousel is restored with demonstration names, optional logo support, a visible pause control and reduced-motion fallback. Example portfolio entries remain outside the sitemap.

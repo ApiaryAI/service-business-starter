@@ -13,12 +13,16 @@ export const site = {
   language: 'en-AU',
   phoneHours: 'Contact hours to be confirmed',
   projectTypes: ['Commercial property', 'Residential property', 'Shared property', 'Other equipment', 'Other project', 'Not sure'],
+  /** Public offices shown in the footer. Use an empty list for a business without a public address. */
+  offices: [
+    { tag: 'NSW', name: 'Head office', lines: ['1 Example Street', 'Example NSW 2000'] },
+  ],
   about: 'Explain who does the work, the services you actually provide and the areas you cover. Add verified experience and qualifications before launch.',
 } as const;
 
 if (site.readyForLaunch) {
   const origin = new URL(site.url);
-  if (origin.protocol !== 'https:' || origin.origin !== site.url || origin.hostname === 'example.com' || origin.hostname.endsWith('.example.com') || site.email.endsWith('@example.com') || site.phone === '0000 000 000' || site.name === 'Your Service Business' || site.region === 'Your service area') {
-    throw new Error('Replace all example business contacts, area and HTTPS origin before launch.');
+  if (origin.protocol !== 'https:' || origin.origin !== site.url || origin.hostname === 'example.com' || origin.hostname.endsWith('.example.com') || site.email.endsWith('@example.com') || site.phone === '0000 000 000' || site.name === 'Your Service Business' || site.region === 'Your service area' || site.offices.some((o) => o.lines.some((l) => /example/i.test(l)))) {
+    throw new Error('Replace all example business contacts, area, office addresses and HTTPS origin before launch.');
   }
 }

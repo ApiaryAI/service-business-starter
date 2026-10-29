@@ -26,6 +26,17 @@ for (const f of pages) {
  }
 }
 const sitemap = readFileSync(join(root,'sitemap.xml.body'),'utf8');
-assert((sitemap.match(/<loc>/g)||[]).length === 15, 'Expected 9 main/policy routes, 3 services and 3 guides');
+const projectData = JSON.parse(readFileSync('content/projects.json','utf8'));
+const realProjects = projectData.filter(p => p.status === 'published' && !p.example);
+for (const project of projectData) for (const image of project.images) {
+ assert(existsSync(join('public', image.src)), `Missing project photo ${image.src}`);
+}
+for (const client of JSON.parse(readFileSync('content/clients.json','utf8'))) {
+ if (client.logo) assert(existsSync(join('public', client.logo.src)), `Missing client logo ${client.logo.src}`);
+}
+assert((sitemap.match(/<loc>/g)||[]).length === 16 + realProjects.length, 'Expected 10 main/policy routes, 3 services, 3 guides and real published projects');
+for (const project of projectData.filter(p => p.example || p.status !== 'published')) {
+ assert(!sitemap.includes(`/projects/${project.slug}/`), 'Example and draft projects must not enter the sitemap');
+}
 assert(!sitemap.includes('draft-example'), 'Draft must not enter sitemap');
 console.log(`Template checks passed: ${pages.length} rendered pages, internal links, demo noindex, identity scan and sitemap.`);

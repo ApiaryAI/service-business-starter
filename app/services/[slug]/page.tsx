@@ -7,6 +7,7 @@ import { company } from '../../../lib/content';
 import { pageMetadata, siteUrl } from '../../../lib/seo';
 import { servicePages, servicePagePath } from '../../../lib/service-pages';
 import { getGuides } from '../../../lib/guides';
+import { getProjects } from '../../../lib/projects';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -27,6 +28,7 @@ export default async function ServiceDetail({ params }: Props) {
   const page = servicePages.find((item) => item.slug === slug);
   if (!page) notFound();
   const published = getGuides().filter((guide) => guide.status === 'published');
+  const projects = getProjects().filter(project => project.serviceSlug === page.slug);
   const guides = (page.guides
     ? page.guides.map((slug) => published.find((guide) => guide.slug === slug)).filter((guide) => guide !== undefined)
     : published.filter((guide) => guide.services.includes(page.serviceId))
@@ -62,6 +64,7 @@ export default async function ServiceDetail({ params }: Props) {
             <ul>{page.checklist.map((item) => <li key={item}>{item}</li>)}</ul>
             <h2>Common questions</h2>
             {page.questions.map((item) => <section key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></section>)}
+            {projects.length > 0 && <nav aria-label="Related projects"><h2>Projects using this service</h2><ul>{projects.map(project => <li key={project.slug}><Link href={`/projects/${project.slug}/`}>{project.title}{project.example ? ' (example layout)' : ''}</Link></li>)}</ul></nav>}
             {guides.length > 0 && <nav aria-label="Related guides"><h2>Practical guides</h2><ul>{guides.map((guide) => <li key={guide.slug}><Link href={`/guides/${guide.slug}/`}>{guide.title}</Link></li>)}</ul></nav>}
             <h2>Related services</h2>
             <ul>{servicePages.filter((item) => item.slug !== slug).map((item) => <li key={item.slug}><Link href={servicePagePath(item.slug)}>{item.title}</Link></li>)}</ul>

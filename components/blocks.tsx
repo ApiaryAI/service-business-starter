@@ -49,17 +49,37 @@ export function Cta({ title = 'Tell us about your project', text }: { title?: st
 export function Footer({ showGuides = false }: { showGuides?: boolean }) {
   return (
     <footer className="hk-footer">
-      <div className="container hk-footer__grid">
+      <div className={`container hk-footer__grid${company.offices.length ? ' hk-footer__grid--offices' : ''}`}>
         <div>
           <Brand size="lg" />
           <p className="hk-footer__line">{company.description}</p>
         </div>
-        <nav aria-label="Footer">
+        <nav aria-labelledby="footer-explore">
+          <h2 className="hk-footer__head" id="footer-explore">Explore</h2>
           <ul className="hk-footer__links">
             {[{ href: '/', label: 'Home' }, ...navLinks(showGuides)].map((i) => <li key={i.href}><Link href={i.href}>{i.label}</Link></li>)}
           </ul>
         </nav>
-        <ContactList compact />
+        <div>
+          <h2 className="hk-footer__head">Get in touch</h2>
+          <ul className="hk-footer__links">
+            <li><a href={company.tel}>{company.phone}</a></li>
+            <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+          </ul>
+        </div>
+        {company.offices.length > 0 && (
+          <div>
+            <h2 className="hk-footer__head">{company.offices.length > 1 ? 'Offices' : 'Office'}</h2>
+            <ul className="hk-footer__offices">
+              {company.offices.map((o) => (
+                <li key={o.name}>
+                  <span className="hk-footer__tag">{o.tag}</span>
+                  <address><strong>{o.name}</strong>{o.lines.map((l) => <span key={l}>{l}</span>)}</address>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="container hk-footer__base">
         <span>© {company.name}</span>

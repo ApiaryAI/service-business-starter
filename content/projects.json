@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "example-maintenance-project",
+    "title": "Example maintenance project",
+    "summary": "A starting layout for showing the problem, the work carried out and the confirmed result.",
+    "location": "Add the suburb or general service area",
+    "serviceSlug": "equipment-maintenance",
+    "problem": "Describe what the customer needed and what was found. Use information you have permission to publish, without identifying a private customer or address.",
+    "work": "Explain the work actually completed, who carried it out and any relevant constraints. Add your own authorised job photographs below.",
+    "outcome": "Describe the verified result and any follow-up work. Include dates, measurements or customer feedback only when accurate and approved for publication.",
+    "status": "published",
+    "workType": "completed",
+    "example": true,
+    "images": []
+  },
+  {
+    "slug": "example-service-location",
+    "title": "Example ongoing service project",
+    "summary": "A starting layout for a building, business or site the company regularly looks after.",
+    "location": "Add the general service area",
+    "serviceSlug": "equipment-maintenance",
+    "problem": "Describe the site and the maintenance or support it needs. Replace this example with an authorised project description.",
+    "work": "Explain the agreed service scope and the company\u2019s role at the site. Distinguish routine servicing from separately quoted repairs.",
+    "outcome": "Summarise the ongoing arrangement and the practical value delivered, using verified information rather than promises.",
+    "status": "published",
+    "workType": "ongoing",
+    "example": true,
+    "images": []
+  }
+]

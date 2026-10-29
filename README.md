@@ -13,6 +13,14 @@ A private reusable Next.js starter for service businesses: focused service pages
 7. Review the website policy examples for the business's actual operations, enabled providers and jurisdiction. They are starting copy, not a complete business contract.
 8. Follow [LAUNCH.md](Docs/LAUNCH.md). Run `npm run check` before release.
 
+## Client cards
+
+The homepage includes the original rotating client-card design with editable names and optional logos. Configure `content/clients.json` and place approved logo files under `public/clients/`. Example cards are labelled demonstrations and disappear when `readyForLaunch` is enabled. Add real relationships with `example: false`; do not reuse another business's customer list. The carousel has a visible pause/resume button, keyboard controls and a static reduced-motion layout.
+
+## Projects
+
+The Projects tab showcases completed jobs and sites the business currently services. Add entries in `content/projects.json` and photographs under `public/projects/`. Each project links to a service and includes an enquiry form for similar work. See [PROJECTS.md](Docs/PROJECTS.md) for the fields and publication rules.
+
 ## Included
 
 - A responsive homepage, service directory, about page and contact page.
