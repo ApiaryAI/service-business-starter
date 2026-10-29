@@ -1,0 +1,4 @@
+import { PolicyLayout, PolicyContacts } from '../../components/Policy';
+import { pageMetadata } from '../../lib/seo';
+export const metadata = pageMetadata('/terms/', 'Website terms', 'Website terms information for this website.');
+export default function Page() { return <PolicyLayout eyebrow="Website information" title="Website terms" intro="Information about using this website."><h2>General information</h2><p>Service pages and guides provide general information. Confirm the actual service scope, availability, price and terms with the business before authorising work.</p><h2>No booking from an enquiry</h2><p>Sending a form starts a conversation. It does not by itself confirm a booking, a diagnosis or a response time.</p><h2>Content</h2><p>Use information appropriate to your circumstances. Do not attempt unfamiliar or restricted work based on a website guide. Business-specific terms must be supplied and reviewed before launch.</p><PolicyContacts /></PolicyLayout>; }

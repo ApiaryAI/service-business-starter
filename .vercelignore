@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.openai
+.git
+.sites-runtime
+*.tsbuildinfo
+reference
+.reference
+Docs
+scripts
