@@ -4,8 +4,6 @@ export const policyLinks = [
   { href: '/privacy/', label: 'Privacy' }, { href: '/terms/', label: 'Website terms' },
   { href: '/accessibility/', label: 'Accessibility' }, { href: '/cookies/', label: 'Cookies' },
 ];
-export const nav = [{ href: '/services', label: 'Services' }, { href: '/projects', label: 'Projects' }, { href: '/about', label: 'About' }, { href: '/contact', label: 'Contact' }];
-export const navLinks = (showGuides: boolean) => showGuides ? [...nav.slice(0,-1), { href: '/guides', label: 'Guides' }, nav[nav.length-1]] : nav;
 export type ArtKind = 'maint' | 'repair' | 'parts';
 export interface Service { id: string; title: string; summary: string; points: string[]; art: ArtKind; enquiry: string }
 export const services: Service[] = [

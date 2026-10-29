@@ -1,6 +1,7 @@
 import projectData from '../content/projects.json';
 import { site } from './site';
 import { servicePages } from './service-pages';
+import { on } from './sections';
 
 export interface Project {
   slug: string;
@@ -41,6 +42,7 @@ export function getProjects(): Project[] {
       }
     }
   }
+  if (!on('projects')) return [];
   return projects.filter(project => project.status === 'published' && (!project.example || !site.readyForLaunch));
 }
 

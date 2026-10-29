@@ -2,6 +2,8 @@ import { pageMetadata } from '../../lib/seo';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { on } from '../../lib/sections';
 import { Arrow, Cta, PageHero } from '../../components/blocks';
 import { formatDate, getGuides, MIN_PUBLISHED, publishedCount } from '../../lib/guides';
 
@@ -13,6 +15,7 @@ export const metadata: Metadata = pageMetadata(
 );
 
 export default function Guides() {
+  if (!on('guides')) notFound();
   const guides = getGuides();
   return (
     <>

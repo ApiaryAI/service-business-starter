@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { on } from '../../lib/sections';
 import { Arrow, Cta, PageHero } from '../../components/blocks';
 import { getProjects } from '../../lib/projects';
 import { servicePages } from '../../lib/service-pages';
@@ -7,6 +9,7 @@ import { pageMetadata } from '../../lib/seo';
 export const metadata = pageMetadata('/projects/', 'Projects', 'Explore completed work and ongoing service projects.');
 
 export default function Projects() {
+  if (!on('projects')) notFound();
   const projects = getProjects();
   return <>
     <PageHero eyebrow="Our work" title="Projects" intro="Completed work and places we look after. Explore the services involved and what each project needs." />

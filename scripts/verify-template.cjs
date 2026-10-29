@@ -34,7 +34,11 @@ for (const project of projectData) for (const image of project.images) {
 for (const client of JSON.parse(readFileSync('content/clients.json','utf8'))) {
  if (client.logo) assert(existsSync(join('public', client.logo.src)), `Missing client logo ${client.logo.src}`);
 }
-assert((sitemap.match(/<loc>/g)||[]).length === 16 + realProjects.length, 'Expected 10 main/policy routes, 3 services, 3 guides and real published projects');
+// The sitemap follows the enabled sections: every entry must be a built page, and the core pages are always listed.
+const locs = [...sitemap.matchAll(/<loc>([^<]*)<\/loc>/g)].map(m => new URL(m[1]).pathname.replace(/[/]$/,'') || '/');
+for (const loc of locs) assert(routes.has(loc), `Sitemap lists ${loc}, which was not built`);
+for (const core of ['/', '/services', '/about', '/contact', '/privacy']) assert(locs.includes(core), `Sitemap is missing ${core}`);
+for (const project of realProjects) assert(locs.includes(`/projects/${project.slug}`), `Sitemap is missing project ${project.slug}`);
 for (const project of projectData.filter(p => p.example || p.status !== 'published')) {
  assert(!sitemap.includes(`/projects/${project.slug}/`), 'Example and draft projects must not enter the sitemap');
 }

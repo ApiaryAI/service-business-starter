@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { marked } from 'marked';
+import { on } from './sections';
 
 /* Guides are Markdown files in content/guides/<slug>.md with a small front matter block.
    Drafts are visible in `next dev` only; a production build includes published guides alone,
@@ -25,7 +26,7 @@ export interface Guide {
   hasNotes: boolean;
 }
 
-function frontMatter(raw: string, file: string) {
+export function frontMatter(raw: string, file: string) {
   const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!m) throw new Error(`${file}: missing front matter`);
   const data: Record<string, string> = {};
@@ -82,6 +83,7 @@ const showDrafts = process.env.NODE_ENV !== 'production';
 
 /** Guides visible in this build, newest first. */
 export function getGuides(): Guide[] {
+  if (!on('guides')) return [];
   return load()
     .filter((g) => showDrafts || g.status === 'published')
     .sort((a, b) => b.updated.localeCompare(a.updated));
@@ -93,7 +95,7 @@ export function getGuide(slug: string): Guide | undefined {
 
 /** The Guides section is only linked and indexed once it has enough real content. */
 export const MIN_PUBLISHED = 3;
-export const publishedCount = () => load().filter((g) => g.status === 'published').length;
+export const publishedCount = () => !on('guides') ? 0 : load().filter((g) => g.status === 'published').length;
 
 /** Dates are stored as YYYY-MM-DD and shown in Australian style. */
 export const formatDate = (iso: string) =>

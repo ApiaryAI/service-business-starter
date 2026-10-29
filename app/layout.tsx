@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Footer } from '../components/blocks';
 import { Header } from '../components/Header';
 import { Tracking } from '../components/Tracking';
+import { EmergencyBar } from '../components/Sections';
 import { getMenus } from '../lib/menus';
 import { company } from '../lib/content';
 import { motionBootScript } from '../lib/motion-boot';
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
  </head><body>
   <a className="skip-link" href="#main">Skip to content</a>
   {!company.readyForLaunch && <div className="starter-demo">Demonstration site — business and contact details are examples.</div>}
+  <EmergencyBar />
   <Header menus={getMenus(true)} /><main id="main" tabIndex={-1}>{children}</main><Footer showGuides /><Tracking />
  </body></html>;
 }

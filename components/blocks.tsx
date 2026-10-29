@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { company, navLinks, policyLinks } from '../lib/content';
+import { company, policyLinks } from '../lib/content';
+import { navLinks } from '../lib/nav';
 import { Brand } from './Brand';
+import { enabledPages, licenceLine, on, sections } from '../lib/sections';
 
 export const Arrow = () => <span className="btn-arrow" aria-hidden="true">→</span>;
 
@@ -49,7 +51,7 @@ export function Cta({ title = 'Tell us about your project', text }: { title?: st
 export function Footer({ showGuides = false }: { showGuides?: boolean }) {
   return (
     <footer className="hk-footer">
-      <div className={`container hk-footer__grid${company.offices.length ? ' hk-footer__grid--offices' : ''}`}>
+      <div className={`container hk-footer__grid${company.offices.length ? ' hk-footer__grid--offices' : ''}${enabledPages().length ? ' hk-footer__grid--company' : ''}`}>
         <div>
           <Brand size="lg" />
           <p className="hk-footer__line">{company.description}</p>
@@ -60,12 +62,21 @@ export function Footer({ showGuides = false }: { showGuides?: boolean }) {
             {[{ href: '/', label: 'Home' }, ...navLinks(showGuides)].map((i) => <li key={i.href}><Link href={i.href}>{i.label}</Link></li>)}
           </ul>
         </nav>
+        {enabledPages().length > 0 && (
+          <nav aria-labelledby="footer-company">
+            <h2 className="hk-footer__head" id="footer-company">Company</h2>
+            <ul className="hk-footer__links">
+              {enabledPages().map((i) => <li key={i.href}><Link href={`${i.href}/`}>{i.label}</Link></li>)}
+            </ul>
+          </nav>
+        )}
         <div>
           <h2 className="hk-footer__head">Get in touch</h2>
           <ul className="hk-footer__links">
             <li><a href={company.tel}>{company.phone}</a></li>
             <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
           </ul>
+          {on('emergency') && <p className="hk-footer__urgent"><span>{sections.emergency.label}</span><a href={sections.emergency.tel}>{sections.emergency.phone}</a></p>}
         </div>
         {company.offices.length > 0 && (
           <div>
@@ -82,7 +93,7 @@ export function Footer({ showGuides = false }: { showGuides?: boolean }) {
         )}
       </div>
       <div className="container hk-footer__base">
-        <span>© {company.name}</span>
+        <span>© {company.name}{licenceLine() && <> · {licenceLine()}</>}</span>
         <nav aria-label="Legal">
           <ul className="hk-footer__legal">
             {policyLinks.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
