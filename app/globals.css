@@ -612,7 +612,7 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
 .sx-quotes blockquote p { margin: 0; }
 .sx-quotes__by { display: grid; margin: 0; font-size: 0.92rem; color: var(--c-muted); }
 .sx-quotes__by strong { color: var(--c-text); }
-.sx-team { display: grid; gap: 28px 22px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.sx-team { display: grid; gap: 28px 16px; grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 8px)), 1fr)); }
 .sx-team img, .sx-team__initials { display: block; width: 100%; aspect-ratio: 5 / 6; object-fit: cover; margin-bottom: 14px; border-radius: var(--radius-lg); border-bottom: 3px solid var(--c-red); }
 .sx-team__initials { display: grid; place-items: center; background: #fff; font-size: 2.4rem; font-weight: 600; color: var(--c-red); }
 .sx-team h3 { margin: 0; font-size: 1.15rem; }
@@ -652,3 +652,24 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
 .sx-lightbox figcaption { padding: 12px 18px 0; }
 .sx-lightbox__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px 18px; }
 .sx-lightbox__bar span { margin-right: auto; }
+
+/* ---------- Careers ---------- */
+.cx-why { align-items: start; }
+.cx-ticks { display: grid; gap: 12px; margin: 22px 0 0; padding: 0; list-style: none; }
+.cx-ticks li { position: relative; padding-left: 34px; font-weight: 600; color: var(--c-text); }
+.cx-ticks li::before { content: "✓"; position: absolute; left: 0; top: 0.05em; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--c-red); color: #fff; font-size: 0.75rem; }
+.cx-benefits { gap: 14px; margin: 0; }
+.cx-benefits li { padding: 20px 22px 20px 58px; border: 1px solid var(--c-line); border-radius: var(--radius-lg); background: #fff; }
+.cx-benefits li::before { left: 22px; top: 50%; transform: translateY(-50%); }
+.cx-ticks--dark li { color: #fff; }
+.cx-roles { display: grid; gap: 16px; margin: 28px 0 0; padding: 0; list-style: none; }
+.cx-roles > li { display: grid; gap: 18px 32px; align-items: center; padding: clamp(22px, 3vw, 32px); border: 1px solid var(--c-line); border-left: 3px solid var(--c-red); border-radius: var(--radius-lg); background: #fff; }
+@media (min-width: 760px) { .cx-roles > li { grid-template-columns: 1fr auto; } }
+.cx-roles h3 { margin: 0 0 10px; font-size: clamp(1.3rem, 2vw, 1.6rem); }
+.cx-roles p { max-width: 62ch; margin: 12px 0 0; }
+.cx-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cx-chips li { padding: 4px 12px; border-radius: 999px; background: var(--c-pale); font-size: 0.85rem; font-weight: 600; color: var(--c-body); }
+.cx-general { margin: 26px 0 0; color: var(--c-body); }
+.cx-general a { font-weight: 700; }
+.cx-apply { margin-top: 28px; }
+.cx-photo { aspect-ratio: 3 / 2; object-fit: cover; }
