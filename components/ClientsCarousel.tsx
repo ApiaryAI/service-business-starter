@@ -6,8 +6,8 @@ import type { Client } from '../lib/clients';
 const TAU = Math.PI * 2;
 
 /* Reusable client-card carousel. With motion on, the cards glide round a
-   tilted ellipse, always upright, with a visible pause control; keyboard users can also focus
-   it and press Space or Enter to pause. With motion off (html.motion-on absent, or no JS) the
+   tilted ellipse, always upright. They pause while the pointer is over them; keyboard users can
+   focus the carousel and press Space or Enter to pause. With motion off (html.motion-on absent, or no JS) the
    same cards sit in a static grid. */
 export function ClientsCarousel({ clients, label = 'Clients', secondsPerClient = 3.2 }: { clients: Client[]; label?: string; secondsPerClient?: number }) {
   const n = clients.length;
@@ -15,6 +15,7 @@ export function ClientsCarousel({ clients, label = 'Clients', secondsPerClient =
   const cards = useRef<(HTMLLIElement | null)[]>([]);
   const root = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
+  const hoverRef = useRef(false);
   const [paused, setPaused] = useState(false);
   const [status, setStatus] = useState('');
 
@@ -44,7 +45,7 @@ export function ClientsCarousel({ clients, label = 'Clients', secondsPerClient =
     const frame = (t: number) => {
       const dt = last ? Math.min(0.1, (t - last) / 1000) : 0;
       last = t;
-      if (!pausedRef.current && onScreen && !document.hidden && html.classList.contains('motion-on')) {
+      if (!pausedRef.current && !hoverRef.current && onScreen && !document.hidden && html.classList.contains('motion-on')) {
         angle = (angle + dt / secondsPerClient) % n;
         place();
       }
@@ -80,6 +81,8 @@ export function ClientsCarousel({ clients, label = 'Clients', secondsPerClient =
       aria-describedby={`${uid}-help`}
       tabIndex={0}
       onKeyDown={onKey}
+      onPointerEnter={() => { hoverRef.current = true; }}
+      onPointerLeave={() => { hoverRef.current = false; }}
     >
       <p className="visually-hidden" id={`${uid}-help`}>
         {n} client cards rotate automatically. Press Space or Enter while the carousel is focused to pause or resume.
@@ -115,7 +118,6 @@ export function ClientsCarousel({ clients, label = 'Clients', secondsPerClient =
           })}
         </ul>
       </div>
-      {n > 1 && <button type="button" className="btn btn--ghost btn--small starter-clients-pause" aria-pressed={paused} onClick={togglePaused}>{paused ? 'Resume client cards' : 'Pause client cards'}</button>}
       <p className="visually-hidden" aria-live="polite">{status}</p>
     </div>
   );

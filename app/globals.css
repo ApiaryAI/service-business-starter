@@ -594,7 +594,6 @@ html.motion-on .hk-clients__face { box-shadow: 0 calc(12px + 16px * var(--c, 0))
 
 .starter-projects{margin-top:0}.starter-projects li{border-top:0;padding-top:0}.starter-project-image{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;margin-bottom:1rem;border-radius:8px}.starter-project-placeholder{display:flex;align-items:flex-end;min-height:180px;aspect-ratio:3/2;background:var(--c-pale);border-bottom:3px solid var(--c-red);padding:1.5rem;margin-bottom:1.25rem;color:var(--c-muted);font-size:.85rem}.starter-project-kind{color:var(--c-muted);font-size:.85rem;margin:-.4rem 0 .6rem}.starter-project-gallery{display:grid;gap:1.5rem}.starter-project-gallery figure{margin:0}.starter-project-gallery figcaption{color:var(--c-muted);font-size:.9rem}
 
-.starter-clients-pause{display:block;margin:1rem auto 0}html:not(.motion-on) .starter-clients-pause{display:none}
 
 /* ---------- Optional sections (content/sections.ts) ---------- */
 .sx-emergency { background: var(--c-red); color: #fff; font-size: 0.9rem; }
