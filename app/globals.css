@@ -121,6 +121,7 @@ html.motion-on .hk-header__rail span { opacity: 1; animation: hk-rail 6s linear 
 @media (prefers-reduced-motion: reduce) { .hk-drop, .hk-nav__chev, .hk-drop__links a::after { transition: none; } }
 .hk-header__call { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .hk-header__call .hk-led { background: #fff; box-shadow: none; }
+.hk-header__short { display: none; }
 .hk-menu-btn { display: none; align-items: center; gap: 10px; margin-left: auto; min-height: 44px; padding: 0 14px; border: 1px solid var(--c-line-2); border-radius: 4px; background: #fff; font-weight: 700; }
 .hk-menu-btn__bars { display: grid; gap: 4px; }
 .hk-menu-btn__bars i { display: block; width: 18px; height: 2px; background: currentColor; transition: transform 0.3s var(--ease-out), opacity 0.2s; }
@@ -136,8 +137,12 @@ html.motion-on .hk-header__rail span { opacity: 1; animation: hk-rail 6s linear 
 .hk-menu__foot { display: grid; gap: 12px; margin-top: 28px; }
 .hk-menu__foot .btn { width: 100%; overflow-wrap: anywhere; }
 @media (max-width: 900px) {
-  .hk-nav, .hk-header__call { display: none; }
-  .hk-menu-btn { display: inline-flex; }
+  .hk-nav { display: none; }
+  /* Phones keep a short call button beside Menu so calling is one tap from anywhere on the page. */
+  .hk-header__call { margin-left: auto; min-height: 44px; }
+  .hk-header__num { display: none; }
+  .hk-header__short { display: inline; }
+  .hk-menu-btn { display: inline-flex; margin-left: 0; }
 }
 @media (min-width: 901px) { .hk-menu { display: none !important; } }
 

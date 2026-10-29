@@ -83,8 +83,11 @@ export function Header({ menus }: { menus: Menu[] }) {
             ))}
           </ul>
         </nav>
-        <a className="btn btn--small hk-header__call" href={company.tel}>
-          <span className="hk-led" aria-hidden="true" /> {company.phone}
+        {/* Stays in the sticky header on every screen; phones show "Call" instead of the number. */}
+        <a className="btn btn--small hk-header__call" href={company.tel} aria-label={`Call ${company.phone}`}>
+          <span className="hk-led" aria-hidden="true" />
+          <span className="hk-header__num">{company.phone}</span>
+          <span className="hk-header__short" aria-hidden="true">Call</span>
         </a>
         <button
           ref={toggle}
