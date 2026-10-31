@@ -17,6 +17,7 @@ export function Header({ menus }: { menus: Menu[] }) {
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState('');
   const toggle = useRef<HTMLButtonElement>(null);
+  const menu = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setOpen(false);
@@ -30,9 +31,17 @@ export function Header({ menus }: { menus: Menu[] }) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { setOpen(false); toggle.current?.focus(); }
     };
+    // The panel is fixed to the viewport and starts at the header's bottom edge, which moves
+    // while a bar above the header (such as the emergency bar) is still on screen.
+    const place = () => {
+      const bottom = toggle.current?.closest('.hk-header')?.getBoundingClientRect().bottom ?? 0;
+      menu.current?.style.setProperty('--menu-top', `${Math.max(0, bottom)}px`);
+    };
+    place();
     document.addEventListener('keydown', onKey);
+    window.addEventListener('resize', place);
     document.body.classList.add('menu-open');
-    return () => { document.removeEventListener('keydown', onKey); document.body.classList.remove('menu-open'); };
+    return () => { document.removeEventListener('keydown', onKey); window.removeEventListener('resize', place); document.body.classList.remove('menu-open'); };
   }, [open]);
 
   const links = (
@@ -102,7 +111,7 @@ export function Header({ menus }: { menus: Menu[] }) {
         </button>
       </div>
       <div className="hk-header__rail" aria-hidden="true"><span /></div>
-      <div id="hk-menu" className="hk-menu" hidden={!open}>
+      <div ref={menu} id="hk-menu" className="hk-menu" hidden={!open}>
         <nav aria-label="Mobile">{links}</nav>
         <div className="hk-menu__foot">
           <a className="btn" href={company.tel}>Call {company.phone}</a>

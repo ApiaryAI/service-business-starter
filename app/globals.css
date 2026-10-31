@@ -128,7 +128,7 @@ html.motion-on .hk-header__rail span { opacity: 1; animation: hk-rail 6s linear 
 .hk-menu-btn[aria-expanded="true"] .hk-menu-btn__bars i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .hk-menu-btn[aria-expanded="true"] .hk-menu-btn__bars i:nth-child(2) { opacity: 0; }
 .hk-menu-btn[aria-expanded="true"] .hk-menu-btn__bars i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-.hk-menu { position: absolute; left: 0; right: 0; top: 100%; height: calc(100dvh - 100%); overflow-y: auto; padding: 18px var(--gutter) 40px; background: #fff; }
+.hk-menu { position: fixed; left: 0; right: 0; top: var(--menu-top, 76px); bottom: 0; overflow-y: auto; overscroll-behavior: contain; padding: 18px var(--gutter) calc(40px + env(safe-area-inset-bottom)); background: #fff; }
 .hk-menu[hidden] { display: none; }
 .hk-menu ul { list-style: none; padding: 0; }
 .hk-menu nav a { display: flex; justify-content: space-between; padding: 16px 2px; border-bottom: 1px solid var(--c-line); font-size: 1.6rem; font-weight: 750; letter-spacing: -0.02em; text-decoration: none; }
