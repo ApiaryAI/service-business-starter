@@ -24,6 +24,8 @@ export const site = {
     { tag: 'NSW', name: 'Head office', lines: ['1 Example Street', 'Example NSW 2000'] },
   ],
   about: 'Explain who does the work, the services you actually provide and the areas you cover. Add verified experience and qualifications before launch.',
+  /** Footer credit for whoever built the site. Change the name and link, or set to null to remove it. */
+  credit: { label: 'Website by', name: 'Daniel Najda', url: 'https://danielnajda.com' } as { label: string; name: string; url: string } | null,
 } as const;
 
 if (site.readyForLaunch) {
