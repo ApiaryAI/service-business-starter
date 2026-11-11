@@ -109,7 +109,7 @@ export function Footer({ showGuides = false }: { showGuides?: boolean }) {
         </div>
       )}
       <div className="container hk-footer__base">
-        <span>© {company.name}{licenceLine() && <> · {licenceLine()}</>}</span>
+        <span>© {company.name}{licenceLine() && <> · {licenceLine()}</>}{company.credit && <> · <span className="hk-footer__credit">{company.credit.label} <a href={company.credit.url}>{company.credit.name}</a></span></>}</span>
         <nav aria-label="Legal">
           <ul className="hk-footer__legal">
             {policyLinks.map((l) => <li key={l.href}><Link href={l.href}>{l.label}</Link></li>)}
